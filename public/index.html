@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Welcome to ConSpotter!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/buttonstyle.css">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+	</head>
+
+	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+    <section class="ftco-section" style="padding-bottom: 0px;">
+  		<div class="container" style="padding-bottom: 0px;">
+  			<div class="row justify-content-center">
+  				<div class="col-md-6 text-center mb-5">
+  					<h2 class="heading-section">Unleash The Power Of Security!</h2>
+  				</div>
+  			</div>
+  			<div class="row justify-content-center">
+  				<div class="col-md-6 col-lg-4">
+  					<div class="login-wrap p-0">
+  		      	<h3 class="mb-4 text-center">Have an account?</h3>
+  		      		<div class="form-group">
+  		      			<input type="email" id='ef' class="form-control" placeholder="Email" required>
+  		      		</div>
+  	            <div class="form-group">
+  	              <input id='pf' type="password" class="form-control" placeholder="Password" required>
+  	              <span toggle="#pf" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+  	            </div>
+  	            <div class="form-group">
+  	            	<button  class="form-control btn1 btn-primary1 submit px-3" id="login">Sign In</button>
+  	            </div>
+  	            <div class="form-group d-md-flex">
+  	            	<div class="w-50">
+  		            	<label class="checkbox-wrap checkbox-primary">Remember Me
+  									  <input type="checkbox" checked>
+  									  <span class="checkmark"></span>
+  									</label>
+  								</div>
+  								<div class="w-50 text-md-right">
+  									<a href="reset.html" id="forget" style="color: #fff">Forgot Password</a>
+  								</div>
+  	            </div>
+                <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+    	          <div class="social d-flex text-center">
+                  <div class="container" >
+                    <ul class="list-inline mb-5">
+                      <li class="list-inline-item">
+    	          	        <button type="button" class="btn btn-default btn-circle btn-xl" id="phone" onclick="display()">
+                            <span class="rounded-circle mx-auto mb-3"></span>
+                            <i class="icon-phone"></i>
+                          </button>
+                      </li>
+                      <li class="list-inline-item">
+    	          	        <button type="button" class="btn btn-default btn-circle btn-xl" id="google">
+                            <span class="rounded-circle mx-auto mb-3"></span>
+                            <i class="icon-social-google"></i>
+                          </button>
+                      </li>
+        	       </div>
+                </div>
+               </div>
+              </div>
+            </div>
+                 <section class="ftco-section" style="display: none;padding-top: 0px;padding-bottom: 0px;" id="phone-section">
+                   <fieldset>
+                     <div class="row justify-content-center">
+               				<div class="col-md-6 col-lg-4">
+               					<div class="login-wrap p-0">
+                           <div class="form-group">
+                             <input type="tel" class="form-control" placeholder="PhoneNumber" id="phoneNumber" name="phoneNumber" pattern="[0-9]"/>
+                           </div>
+                             <div class="form-group">
+                             <input type="text" class="form-control" placeholder="Enter OTP" id="code" name="code"/>
+                           </div>
+                           <div id="recaptcha-container"></div>
+                           <button class="bton bton-6 bton-6f " id="getCode">Get Code</button>
+                           <button class="bton bton-6 bton-6f " id="signInWithPhone">Login</button>
+                         </div>
+                       </div>
+                     </div>
+                   </fieldset>
+                 </section>
+
+
+
+
+</div>
+</section>
+      <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/signup.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+
+    function display() {
+       var e = document.getElementById('phone-section');
+       if(e.style.display == 'block'){
+         e.style.display = 'none';
+       }
+       else{
+          e.style.display = 'block';
+        }
+}
+</script>
+  </body>
+</html>

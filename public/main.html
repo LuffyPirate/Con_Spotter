@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Con Spotter</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+  <style media="screen">
+  .loadergif{
+  	position:fixed;
+  	z-index:99;
+  	top:0;
+  	left:0;
+  	width:100%;
+  	height:100%;
+  	display: flex;
+  	background:#131313;
+  	justify-content:center;
+  	align-items:center;
+    display: none;
+  }
+  .loadergif.hidden{
+  	animation:fadeout 1s;
+  	animation-fill-mode:forwards;
+  	}
+
+  .loadergif > image{
+  	width:100px;
+  }
+  @keyframes fadeout{
+  	100%{
+  		opacity:0;
+  		visibility:hidden;
+  	}
+  }
+  .thumb{
+  	position:relative;
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  }
+
+  .vertical-center {
+    margin: 0;
+    position: relative;
+    text-align:center;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  </style>
+
+
+<body id="page-top">
+  <div class="loadergif" id="loader">
+  <image src="load.gif" alt="loading.." />
+</div>
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+        </li>
+        <li class="sidebar-nav-item">
+        </li>
+        <li class="sidebar-nav-item">
+        </li>
+        <li class="sidebar-nav-item">
+        <a class="btn btn-primary btn-xl js-scroll-trigger" onclick="logout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- Header -->
+<header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1">Con Spotter</h1>
+      <h3 class="mb-5">
+        <em>Credit Card Fraud Detection</em>
+      </h3>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" style="background-color:#1d809f" href="#Test_Upload">Run Test</a>
+    </div>
+    <div class="overlay"></div>
+  </header>
+
+  <!-- Test Upload -->
+  <section class="content-section bg-light" id="Test_Upload">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>Upload Your Trained Data Set In .CSV File Format</h2>
+		<input type="file" id="real-file" hidden="hidden" onchange="return fileValidation()">
+		<button class="btn btn-dark btn-xl js-scroll-trigger" type="button" id="custom-button">CHOOSE A FILE</button>
+		<span id="custom-text">No File Chosen, Yet!</span>
+           <button class="btn btn-dark btn-xl js-scroll-trigger" type="button" id="upload">Upload</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Algorithm -->
+  <section class="content-section bg-primary text-white text-center" id="Algorithm">
+    <div class="container">
+      <div class="content-section-heading">
+        <h2 class="text-secondary mb-0">Algorithm</h2>
+        <h3 class="mb-5">Choose Any Algorithm From Below</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0" style="margin-left: 75px;">
+          <span class="rounded-circle mx-auto mb-3">
+            <button type="button" class="btn btn-default btn-circle btn-xl" id="rndfrst" onclick="rndfrst()"><i class="icon-organization"></i></button>
+          </span>
+          <h4>
+            <strong>Random Forest</strong>
+          </h4>
+          <p class="text-faded mb-0"><i class="fas fa-heart"></i></p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0" style="margin-left: 75px;">
+          <span class="rounded-circle mx-auto mb-3">
+            <button type="button" class="btn btn-default btn-circle btn-xl" id="knn" onclick="knn()"><i class="icon-disc"></i></button>
+          </span>
+          <h4>
+            <strong>K-NEAREST NEIGHBOUR (KNN)</strong>
+          </h4>
+          <p class="text-faded mb-0"><i class="fas fa-heart"></i></p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0" style="margin-left: 75px;">
+          <span class=" rounded-circle mx-auto mb-3">
+            <button type="button" class="btn btn-default btn-circle btn-xl" id="ada" onclick="ada()" ><i class="icon-rocket"></i></button>
+          </span>
+          <h4>
+            <strong>ADA Boost Classifier</strong>
+          </h4>
+          <p class="text-faded mb-0"><i class="fas fa-heart"></i></p>
+        </div>
+		 <!-- <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class=" rounded-circle mx-auto mb-3">
+            <button type="button" class="btn btn-default btn-circle btn-xl" id="voting" onclick="voting()"><i class="icon-chart"></i></button>
+          </span>
+          <h4>
+            <strong>Voting</strong>
+          </h4>
+          <p class="text-faded mb-0"><i class="fas fa-heart"></i></p>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="https://www.github.com">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; ConSpotter 2021</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="js/firebase.js"></script>
+  <script src="js/func.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/stylish-portfolio.min.js"></script>
+
+</body>
+
+</html>
